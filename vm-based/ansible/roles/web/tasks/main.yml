@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+---
+- name: Install the nginx version {{ nginx_version }}
+  apt:
+    name: nginx="{{ nginx_version }}"
+    state: present
+
+- name: Remove default nginx config
+  file:
+    name: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Copy nginx config
+  template:
+    src: mysite.conf
+    dest: /etc/nginx/sites-enabled/mysite.conf
+=======
+---
+
+- name: Packaging image
+  import_tasks: packer-imaging.yml
+  tags:
+    - packer-imaging
+
+- name: deployment
+  import_tasks: deployment.yml
+  tags:
+    - deployments
+>>>>>>> upstream/main
